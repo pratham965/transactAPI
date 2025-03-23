@@ -123,7 +123,8 @@ async def ml_predict(api_data: dict = Body(...)):
     X_new = apply_transformations(test_df)
     prediction = predict('best_model.pkl',X_new)
 
-    return {"prediction":prediction}
+    return {"prediction": prediction.tolist()}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8100)
