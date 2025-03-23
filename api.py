@@ -120,7 +120,7 @@ async def ml_predict(api_data: dict = Body(...)):
     csv_filename = "./transactions.csv"
     df.to_csv(csv_filename, index=False)
     test_df=pd.read_csv('./transactions.csv')
-    X_new ,Y_new= apply_transformations(test_df)
+    X_new = apply_transformations(test_df)
     prediction = predict('best_model.pkl',X_new)
 
     return {"prediction":prediction}
