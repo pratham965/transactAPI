@@ -10,9 +10,12 @@ rcParams['figure.figsize'] = 14, 8
 RANDOM_SEED = 42
 LABELS = ["Normal", "Fraud"]
 
-def predict(path,X_new):
+def predict(path, X_new):
+    # Load the model
     with open(path, "rb") as file:
         model = pickle.load(file)
+
+    # Get expected feature names
     expected_features = model.feature_names_in_
 
     # Ensure X_new has the same features as expected
@@ -20,11 +23,11 @@ def predict(path,X_new):
         if col not in X_new.columns:
             X_new[col] = 0  # Add missing features with default value
 
-    # Ensure the column order matches
+
     X_new = X_new[expected_features]
 
-    # Make predictions
     predictions = model.predict(X_new)
+
     return predictions
 
 def apply_transformations(df, filename="transformations.pkl"):
