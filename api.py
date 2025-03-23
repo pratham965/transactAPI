@@ -123,7 +123,7 @@ async def ml_predict(api_data: dict = Body(...)):
     X_new = apply_transformations(test_df)
     prediction = predict('best_model.pkl',X_new)
 
-    return {"prediction": prediction.tolist()}
+    return {"transaction_id": api_data.get("transaction_id", ""),"is_fraud": prediction.tolist()[0]}
 
 
 if __name__ == "__main__":
